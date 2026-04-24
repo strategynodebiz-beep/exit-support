@@ -1,9 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>退職の決意支援ジェネレーター | 心の負担を最小限に</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #4A90E2; --bg-color: #F7FAFC; --card-bg: #FFFFFF; --text-main: #2D3748; --text-muted: #718096; --accent-bg: #EBF8FF; --border-color: #E2E8F0; }
+        body { font-family: 'Noto Sans JP', sans-serif; background-color: var(--bg-color); color: var(--text-main); line-height: 1.7; margin: 0; padding: 20px 15px; }
+        .container { max-width: 600px; margin: auto; background: var(--card-bg); padding: 30px 20px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+        .header-area { text-align: center; margin-bottom: 25px; }
+        h1 { color: var(--text-main); font-size: 22px; font-weight: 700; margin-bottom: 10px; }
+        .subtitle { font-size: 14px; color: var(--text-muted); background: var(--bg-color); padding: 10px; border-radius: 8px; display: inline-block; }
+        label { display: block; margin-top: 20px; font-weight: 500; font-size: 15px; color: var(--text-main); }
+        select { width: 100%; padding: 14px; margin-top: 8px; border: 1px solid var(--border-color); border-radius: 10px; box-sizing: border-box; font-size: 15px; background-color: #FAFAFA; color: var(--text-main); appearance: none; font-family: inherit; }
+        select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2); }
+        button { width: 100%; background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%); color: white; padding: 16px; border: none; border-radius: 10px; font-size: 16px; font-weight: 700; margin-top: 25px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 6px rgba(74, 144, 226, 0.3); }
+        button:hover { transform: translateY(-2px); box-shadow: 0 6px 12px rgba(74, 144, 226, 0.4); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        #result { margin-top: 25px; padding: 20px; background: var(--accent-bg); border-radius: 10px; display: none; white-space: pre-wrap; font-size: 15px; border-left: 4px solid var(--primary); color: #2B6CB0; line-height: 1.8; animation: fadeIn 0.5s ease forwards; }
+        .affiliate-section { margin-top: 40px; padding: 20px; background: #FFF5F5; border-radius: 12px; text-align: center; box-shadow: inset 0 0 0 1px #FED7D7; }
+        .affiliate-section h2 { font-size: 17px; color: #C53030; margin-top: 0; font-weight: 700; }
+        .affiliate-section p { font-size: 13px; color: #4A5568; margin-bottom: 15px; }
+        .affiliate-section a { display: inline-block !important; background: #E53E3E !important; color: white !important; padding: 14px 24px !important; text-decoration: none !important; border-radius: 8px !important; font-weight: bold !important; font-size: 15px !important; transition: background 0.3s !important; box-shadow: 0 4px 6px rgba(229, 62, 62, 0.3) !important; }
+        .affiliate-section a:hover { background: #C53030 !important; }
+        .affiliate-section img { display: none !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-area">
+            <h1>退職メッセージ生成ツール</h1>
+            <div class="subtitle">角を立てず、あなたの心を守るための言葉を作ります</div>
+        </div>
+        
+        <label>いま、どのような状況ですか？</label>
+        <select id="reason">
+            <option value="burnout">人間関係・精神的に限界</option>
+            <option value="health">体調不良（通院・疲労など）</option>
+            <option value="family">家庭の事情</option>
+            <option value="next">環境を変えて次に進みたい</option>
+        </select>
+
+        <label>どのようにお伝えしますか？</label>
+        <select id="method">
+            <option value="line">LINE・メールで送る</option>
+            <option value="letter">正式な退職願として書く</option>
+        </select>
+
+        <button onclick="generate()">フレーズを作成する</button>
+
+        <div id="result"></div>
+
         <div class="affiliate-section">
             <h2>どうしても自分で伝えるのが怖い方へ</h2>
             <p>この文章すら送る気力が湧かない、送信ボタンを押す手が震える…。<br>それなら、プロに任せて即日退職する道もあります。逃げるのは甘えではありません。あなたの心を守ることが最優先です。</p>
             
             <a href="https://www.gaia-law-office.jp/taisyoku/index.html">退職代行サービスの詳細を見る</a>
-            </div>
+            
+        </div>
     </div>
 
     <script>
@@ -11,20 +66,17 @@
             const reason = document.getElementById('reason').value;
             const method = document.getElementById('method').value;
             let text = "";
-
             const templates = {
                 burnout: "一身上の都合により、これ以上業務を継続することが困難な状況となりました。",
                 health: "体調不良が続いており、医師の診断や自身の判断の結果、まずは療養に専念せざるを得なくなりました。",
                 family: "家庭の事情により、急遽生活環境を整える必要が生じ、現在の勤務継続が難しくなりました。",
                 next: "自身の将来を真剣に検討した結果、新たな環境へ挑戦したいという結論に至りました。"
             };
-
             if(method === 'line') {
                 text = "お疲れ様です。突然のご連絡となり申し訳ありません。\n\n" + templates[reason] + "\n誠に勝手ながら、本日をもちまして退職させていただきたく、ご報告申し上げます。\n\n本来であれば直接お伝えすべきところ、このような形でのご連絡となることを深くお詫び申し上げます。今後の手続き等については、追ってご相談させていただけますと幸いです。";
             } else {
                 text = "退職願\n\n私儀\n\nこの度、" + templates[reason] + "\nにつき、令和〇年〇月〇日をもって退職いたしたく、ここにお願い申し上げます。\n\n令和〇年〇月〇日\n〇〇 〇〇 殿";
             }
-
             const resultDiv = document.getElementById('result');
             resultDiv.innerText = text;
             resultDiv.style.display = 'block';
